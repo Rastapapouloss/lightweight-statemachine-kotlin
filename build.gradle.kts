@@ -23,14 +23,12 @@ tasks.test {
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/kpiljoong/lightweight-statemachine-kotlin")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
-            }
+    publications {
+        create<MavenPublication>("default") {
+            from(components["java"])
+            groupId = "com.github.kpiljoong"
+            artifactId = "lightweight-statemachine-kotlin"
+            version = "1.0.0"
         }
     }
 }
